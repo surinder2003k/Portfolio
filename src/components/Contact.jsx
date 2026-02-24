@@ -51,13 +51,6 @@ export default function Contact() {
                             </div>
                         </div>
                         <div className="contact-item">
-                            <div className="contact-item-icon"><Phone size={22} /></div>
-                            <div>
-                                <div className="contact-item-label">Phone</div>
-                                <div className="contact-item-value">+91 6230214334</div>
-                            </div>
-                        </div>
-                        <div className="contact-item">
                             <div className="contact-item-icon"><MapPin size={22} /></div>
                             <div>
                                 <div className="contact-item-label">Location</div>
