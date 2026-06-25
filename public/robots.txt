@@ -1,0 +1,8 @@
+# Robots.txt for Surinder Kumar Portfolio
+# https://surinder-web-dev.vercel.app/
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://surinder-web-dev.vercel.app/sitemap.xml
