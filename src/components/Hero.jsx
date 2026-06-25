@@ -39,13 +39,13 @@ export default function Hero() {
                     </motion.h1>
 
                     <motion.p className="hero-role" variants={fadeUp} custom={3}>
-                        Full Stack MERN Developer
+                        Vibe Coder & Full Stack Developer
                     </motion.p>
 
                     <motion.p className="hero-description" variants={fadeUp} custom={4}>
-                        Passionate about building practical, efficient web applications with React,
-                        Node.js, MongoDB & Express.js. I craft clean, optimized code and keep
-                        pushing the boundaries of modern web tech.
+                        Vibe coder & Full Stack MERN Developer crafting AI-powered apps,
+                        modern web experiences, and SEO-optimized solutions with React, Node.js,
+                        MongoDB & Express.js. I build fast, ship faster.
                     </motion.p>
 
                     <motion.div className="hero-actions" variants={fadeUp} custom={5}>
@@ -64,7 +64,7 @@ export default function Hero() {
 
                     <motion.div className="hero-stats" variants={fadeUp} custom={6}>
                         <div className="hero-stat">
-                            <h3>5+</h3>
+                            <h3>8+</h3>
                             <p>Projects</p>
                         </div>
                         <div className="hero-stat">
