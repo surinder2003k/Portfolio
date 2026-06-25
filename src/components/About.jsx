@@ -57,10 +57,10 @@ export default function About() {
                     </motion.h2>
 
                     <motion.p className="about-text" variants={fadeUp}>
-                        I'm a Vibe Coder & Full Stack MERN Developer from Mohali, Punjab with a
+                        I'm a Full Stack MERN Developer from Mohali, Punjab with a
                         Bachelor's degree in Computer Application from Rayat Bahra University
                         (2022&ndash;2025). I thrive on building AI-powered apps, modern web experiences,
-                        and SEO-optimized solutions &mdash; all through the power of vibe coding.
+                        and SEO-optimized solutions using the latest technologies.
                     </motion.p>
 
                     <motion.div className="about-details" variants={fadeUp}>
