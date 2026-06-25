@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-scroll';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const navItems = [
@@ -16,16 +16,21 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
 
-    useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 50);
-        window.addEventListener('scroll', onScroll);
-        return () => window.removeEventListener('scroll', onScroll);
+    const handleScroll = useCallback(() => {
+        setScrolled(window.scrollY > 50);
     }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [handleScroll]);
 
     useEffect(() => {
         document.body.style.overflow = mobileOpen ? 'hidden' : '';
         return () => { document.body.style.overflow = ''; };
     }, [mobileOpen]);
+
+    const closeMobile = () => setMobileOpen(false);
 
     return (
         <motion.nav
@@ -33,13 +38,22 @@ export default function Navbar() {
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
+            role="navigation"
+            aria-label="Main navigation"
         >
             <div className="container">
-                <Link to="hero" smooth duration={500} className="nav-logo" style={{ cursor: 'pointer' }}>
+                <Link
+                    to="hero"
+                    smooth
+                    duration={500}
+                    className="nav-logo"
+                    style={{ cursor: 'pointer' }}
+                    aria-label="Go to top"
+                >
                     S<span>K</span>
                 </Link>
 
-                <div className={`nav-links ${mobileOpen ? 'open' : ''}`}>
+                <div className={`nav-links ${mobileOpen ? 'open' : ''}`} role="menubar">
                     {navItems.map((item) => (
                         <Link
                             key={item.to}
@@ -50,7 +64,8 @@ export default function Navbar() {
                             spy
                             activeClass="active"
                             className="nav-link"
-                            onClick={() => setMobileOpen(false)}
+                            onClick={closeMobile}
+                            role="menuitem"
                         >
                             {item.name}
                         </Link>
@@ -60,6 +75,7 @@ export default function Navbar() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn-primary nav-cta"
+                        aria-label="View Resume (opens in new tab)"
                     >
                         Resume
                     </a>
@@ -67,10 +83,11 @@ export default function Navbar() {
 
                 <button
                     className="mobile-toggle"
-                    onClick={() => setMobileOpen(!mobileOpen)}
-                    aria-label="Toggle navigation"
+                    onClick={() => setMobileOpen((prev) => !prev)}
+                    aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                    aria-expanded={mobileOpen}
                 >
-                    {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+                    {mobileOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
                 </button>
             </div>
         </motion.nav>

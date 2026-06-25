@@ -8,7 +8,7 @@ const fadeUp = {
 
 const timelineData = [
     {
-        date: '2022 – 2025',
+        date: '2022 \u2013 2025',
         title: 'Bachelor of Computer Application',
         org: 'Rayat Bahra University',
         desc: 'Focused on building practical and efficient web applications. Explored MERN stack development and hands-on project experience. CGPA: 7.82',
@@ -33,13 +33,13 @@ const timelineData = [
     },
     {
         date: '2022',
-        title: 'High School – 84.05%',
+        title: 'High School \u2013 84.05%',
         org: 'Pathseekers School, Beas',
         desc: 'Completed senior secondary education with distinction.',
     },
     {
         date: '2020',
-        title: 'Matriculation – 79%',
+        title: 'Matriculation \u2013 79%',
         org: 'Pathseekers School, Beas',
         desc: 'Completed matriculation with excellent academic performance.',
     },
@@ -50,7 +50,7 @@ export default function Experience() {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section className="section" id="experience" ref={ref}>
+        <section className="section" id="experience" ref={ref} aria-label="Education and experience timeline">
             <div className="container">
                 <motion.div
                     style={{ textAlign: 'center', marginBottom: '20px' }}
@@ -59,7 +59,7 @@ export default function Experience() {
                     variants={fadeUp}
                 >
                     <h2 className="section-title">
-                        Education &amp; <span className="gradient-text">Experience</span>
+                        Education & <span className="gradient-text">Experience</span>
                     </h2>
                     <p className="section-subtitle" style={{ margin: '0 auto' }}>
                         My academic journey and professional training that shaped my career as a developer.
@@ -82,8 +82,8 @@ export default function Experience() {
                                 },
                             }}
                         >
-                            <div className="timeline-dot" />
-                            <span className="timeline-date">{item.date}</span>
+                            <div className="timeline-dot" aria-hidden="true" />
+                            <time className="timeline-date">{item.date}</time>
                             <h3 className="timeline-title">{item.title}</h3>
                             <p className="timeline-org">{item.org}</p>
                             <p className="timeline-desc">{item.desc}</p>

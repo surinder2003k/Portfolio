@@ -5,6 +5,7 @@ export default function ParticlesBg() {
 
     useEffect(() => {
         const canvas = canvasRef.current;
+        if (!canvas) return;
         const ctx = canvas.getContext('2d');
         let animationId;
         let particles = [];
@@ -19,6 +20,10 @@ export default function ParticlesBg() {
 
         class Particle {
             constructor() {
+                this.reset();
+            }
+
+            reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.size = Math.random() * 2 + 0.5;
@@ -31,9 +36,9 @@ export default function ParticlesBg() {
                 this.x += this.speedX;
                 this.y += this.speedY;
                 if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
+                else if (this.x < 0) this.x = canvas.width;
                 if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
+                else if (this.y < 0) this.y = canvas.height;
             }
 
             draw() {
@@ -46,7 +51,7 @@ export default function ParticlesBg() {
 
         const init = () => {
             particles = [];
-            const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 15000));
+            const count = Math.min(60, Math.floor((canvas.width * canvas.height) / 18000));
             for (let i = 0; i < count; i++) {
                 particles.push(new Particle());
             }
@@ -72,10 +77,10 @@ export default function ParticlesBg() {
 
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach((p) => {
-                p.update();
-                p.draw();
-            });
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
             connectParticles();
             animationId = requestAnimationFrame(animate);
         };
@@ -86,6 +91,7 @@ export default function ParticlesBg() {
         return () => {
             window.removeEventListener('resize', resize);
             cancelAnimationFrame(animationId);
+            particles = [];
         };
     }, []);
 
@@ -93,7 +99,14 @@ export default function ParticlesBg() {
         <canvas
             ref={canvasRef}
             className="particles"
-            style={{ position: 'fixed', inset: 0, zIndex: -1, pointerEvents: 'none' }}
+            style={{
+                position: 'fixed',
+                inset: 0,
+                zIndex: -1,
+                pointerEvents: 'none',
+                willChange: 'transform',
+            }}
+            aria-hidden="true"
         />
     );
 }

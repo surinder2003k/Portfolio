@@ -51,7 +51,7 @@ export default function Skills() {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section className="section" id="skills" ref={ref}>
+        <section className="section" id="skills" ref={ref} aria-label="Skills and technologies">
             <div className="container">
                 <motion.div
                     style={{ textAlign: 'center', marginBottom: '10px' }}
@@ -98,6 +98,7 @@ export default function Skills() {
                                     <div
                                         className="skill-icon"
                                         style={{ background: `${skill.color}20`, color: skill.color }}
+                                        aria-hidden="true"
                                     >
                                         {skill.name.slice(0, 2).toUpperCase()}
                                     </div>

@@ -4,14 +4,16 @@ import { Heart } from 'lucide-react';
 const footerLinks = ['Home', 'About', 'Experience', 'Skills', 'Projects', 'Contact'];
 
 export default function Footer() {
+    const year = new Date().getFullYear();
+
     return (
-        <footer className="footer">
+        <footer className="footer" role="contentinfo">
             <div className="container">
-                <div className="footer-logo">
+                <div className="footer-logo" aria-label="Surinder Kumar logo">
                     S<span>K</span>
                 </div>
 
-                <div className="footer-links">
+                <nav className="footer-links" aria-label="Footer navigation">
                     {footerLinks.map((item) => (
                         <Link
                             key={item}
@@ -24,11 +26,11 @@ export default function Footer() {
                             {item}
                         </Link>
                     ))}
-                </div>
+                </nav>
 
                 <p className="footer-copy">
-                    © 2025 Surinder Kumar. Made with{' '}
-                    <Heart size={14} style={{ display: 'inline', color: '#ff6b9d', verticalAlign: 'middle' }} />{' '}
+                    &copy; {year} Surinder Kumar. Made with{' '}
+                    <Heart size={14} style={{ display: 'inline', color: '#ff6b9d', verticalAlign: 'middle' }} aria-hidden="true" />{' '}
                     using React.js
                 </p>
             </div>

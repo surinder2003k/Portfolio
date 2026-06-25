@@ -16,8 +16,11 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Initial load logic if needed
-    // The LoadingScreen component itself handles the timeout
+    // Prevents scroll jump during loading transition
+    document.documentElement.style.scrollBehavior = 'smooth';
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
   }, []);
 
   return (
@@ -28,13 +31,15 @@ export default function App() {
         <div key="content">
           <ParticlesBg />
           <Navbar />
-          <Hero />
-          <About />
-          <Experience />
-          <Skills />
-          <Projects />
-          <Certificates />
-          <Contact />
+          <main>
+            <Hero />
+            <About />
+            <Experience />
+            <Skills />
+            <Projects />
+            <Certificates />
+            <Contact />
+          </main>
           <Footer />
         </div>
       )}

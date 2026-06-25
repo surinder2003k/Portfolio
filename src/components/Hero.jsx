@@ -13,10 +13,10 @@ const fadeUp = {
 
 export default function Hero() {
     return (
-        <section className="hero" id="hero">
-            <div className="hero-bg-grid" />
-            <div className="hero-glow hero-glow-1" />
-            <div className="hero-glow hero-glow-2" />
+        <section className="hero" id="hero" aria-label="Hero introduction">
+            <div className="hero-bg-grid" aria-hidden="true" />
+            <div className="hero-glow hero-glow-1" aria-hidden="true" />
+            <div className="hero-glow hero-glow-2" aria-hidden="true" />
 
             <div className="container">
                 <motion.div
@@ -26,12 +26,12 @@ export default function Hero() {
                     variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
                 >
                     <motion.div className="hero-badge" variants={fadeUp} custom={0}>
-                        <span className="pulse" />
+                        <span className="pulse" aria-hidden="true" />
                         Available for Work
                     </motion.div>
 
                     <motion.p className="hero-greeting" variants={fadeUp} custom={1}>
-                        Hello, I&apos;m
+                        Hello, I'm
                     </motion.p>
 
                     <motion.h1 variants={fadeUp} custom={2}>
@@ -44,19 +44,21 @@ export default function Hero() {
 
                     <motion.p className="hero-description" variants={fadeUp} custom={4}>
                         Passionate about building practical, efficient web applications with React,
-                        Node.js, MongoDB &amp; Express.js. I craft clean, optimized code and keep
+                        Node.js, MongoDB & Express.js. I craft clean, optimized code and keep
                         pushing the boundaries of modern web tech.
                     </motion.p>
 
                     <motion.div className="hero-actions" variants={fadeUp} custom={5}>
                         <Link to="contact" smooth duration={500} offset={-80}>
-                            <button className="btn-primary">
-                                Let&apos;s Talk
-                                <ArrowDown size={18} />
+                            <button className="btn-primary" aria-label="Navigate to contact section">
+                                Let's Talk
+                                <ArrowDown size={18} aria-hidden="true" />
                             </button>
                         </Link>
                         <Link to="projects" smooth duration={500} offset={-80}>
-                            <button className="btn-outline">View Projects</button>
+                            <button className="btn-outline" aria-label="Navigate to projects section">
+                                View Projects
+                            </button>
                         </Link>
                     </motion.div>
 
@@ -81,17 +83,19 @@ export default function Hero() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
+                    role="img"
+                    aria-label="Surinder Kumar avatar with tech stack badges"
                 >
                     <div className="hero-avatar-wrapper">
-                        <div className="hero-avatar-ring" />
-                        <div className="hero-avatar">SK</div>
+                        <div className="hero-avatar-ring" aria-hidden="true" />
+                        <div className="hero-avatar" aria-hidden="true">SK</div>
 
                         <motion.div
                             className="hero-floating-badge floating-badge-1"
                             animate={{ y: [0, -15, 0] }}
                             transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
                         >
-                            <Code2 size={18} color="#6c63ff" /> React.js
+                            <Code2 size={18} color="#6c63ff" aria-hidden="true" /> React.js
                         </motion.div>
 
                         <motion.div
@@ -99,7 +103,7 @@ export default function Hero() {
                             animate={{ y: [0, -15, 0] }}
                             transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut', delay: 1 }}
                         >
-                            <Server size={18} color="#00d4aa" /> Node.js
+                            <Server size={18} color="#00d4aa" aria-hidden="true" /> Node.js
                         </motion.div>
 
                         <motion.div
@@ -107,7 +111,7 @@ export default function Hero() {
                             animate={{ y: [0, -15, 0] }}
                             transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut', delay: 2 }}
                         >
-                            <Palette size={18} color="#ff6b9d" /> MongoDB
+                            <Palette size={18} color="#ff6b9d" aria-hidden="true" /> MongoDB
                         </motion.div>
                     </div>
                 </motion.div>

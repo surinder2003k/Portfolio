@@ -46,7 +46,7 @@ export default function Projects() {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section className="section" id="projects" ref={ref}>
+        <section className="section" id="projects" ref={ref} aria-label="Featured projects">
             <div className="container">
                 <motion.div
                     style={{ textAlign: 'center', marginBottom: '20px' }}
@@ -58,13 +58,13 @@ export default function Projects() {
                         Featured <span className="gradient-text">Projects</span>
                     </h2>
                     <p className="section-subtitle" style={{ margin: '0 auto' }}>
-                        A selection of projects I&apos;ve built – from full-stack apps to responsive web experiences.
+                        A selection of projects I've built &ndash; from full-stack apps to responsive web experiences.
                     </p>
                 </motion.div>
 
                 <div className="projects-grid">
                     {projects.map((project, i) => (
-                        <motion.div
+                        <motion.article
                             key={i}
                             className="glass-card project-card"
                             initial="hidden"
@@ -79,7 +79,7 @@ export default function Projects() {
                             }}
                             whileHover={{ y: -8, transition: { duration: 0.3 } }}
                         >
-                            <div className="project-image" style={{ background: project.gradient }}>
+                            <div className="project-image" style={{ background: project.gradient }} aria-hidden="true">
                                 {project.initials}
                             </div>
 
@@ -99,8 +99,9 @@ export default function Projects() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="project-link live"
+                                        aria-label={`View live demo of ${project.title} (opens in new tab)`}
                                     >
-                                        <ExternalLink size={16} /> Live Demo
+                                        <ExternalLink size={16} aria-hidden="true" /> Live Demo
                                     </a>
                                 )}
                                 <a
@@ -108,11 +109,12 @@ export default function Projects() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="project-link code"
+                                    aria-label="View GitHub profile (opens in new tab)"
                                 >
-                                    <Github size={16} /> GitHub
+                                    <Github size={16} aria-hidden="true" /> GitHub
                                 </a>
                             </div>
-                        </motion.div>
+                        </motion.article>
                     ))}
                 </div>
             </div>

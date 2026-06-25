@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Globe } from 'lucide-react';
 
 const fadeUp = {
@@ -11,21 +11,24 @@ export default function Contact() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-100px' });
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+    const [sent, setSent] = useState(false);
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const handleChange = useCallback((e) => {
+        setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = useCallback((e) => {
         e.preventDefault();
         const mailtoLink = `mailto:surinder2003k@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
             `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
         )}`;
         window.open(mailtoLink);
-    };
+        setSent(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+    }, [formData]);
 
     return (
-        <section className="section contact" id="contact" ref={ref}>
+        <section className="section contact" id="contact" ref={ref} aria-label="Get in touch">
             <div className="container">
                 <motion.div
                     className="contact-info"
@@ -38,20 +41,20 @@ export default function Contact() {
                     </motion.h2>
 
                     <motion.p className="contact-text" variants={fadeUp}>
-                        I&apos;m always open to new opportunities, collaborations, and interesting
-                        projects. Feel free to reach out — let&apos;s build something amazing together!
+                        I'm always open to new opportunities, collaborations, and interesting
+                        projects. Feel free to reach out &mdash; let's build something amazing together!
                     </motion.p>
 
                     <motion.div className="contact-details" variants={fadeUp}>
                         <div className="contact-item">
-                            <div className="contact-item-icon"><Mail size={22} /></div>
+                            <div className="contact-item-icon" aria-hidden="true"><Mail size={22} /></div>
                             <div>
                                 <div className="contact-item-label">Email</div>
                                 <div className="contact-item-value">surinder2003k@gmail.com</div>
                             </div>
                         </div>
                         <div className="contact-item">
-                            <div className="contact-item-icon"><MapPin size={22} /></div>
+                            <div className="contact-item-icon" aria-hidden="true"><MapPin size={22} /></div>
                             <div>
                                 <div className="contact-item-label">Location</div>
                                 <div className="contact-item-value">Mohali (Kharar), Punjab, India</div>
@@ -65,7 +68,7 @@ export default function Contact() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="social-link"
-                            aria-label="GitHub"
+                            aria-label="GitHub profile (opens in new tab)"
                         >
                             <Github size={22} />
                         </a>
@@ -74,7 +77,7 @@ export default function Contact() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="social-link"
-                            aria-label="LinkedIn"
+                            aria-label="LinkedIn profile (opens in new tab)"
                         >
                             <Linkedin size={22} />
                         </a>
@@ -83,7 +86,7 @@ export default function Contact() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="social-link"
-                            aria-label="Website"
+                            aria-label="Personal website (opens in new tab)"
                         >
                             <Globe size={22} />
                         </a>
@@ -96,7 +99,7 @@ export default function Contact() {
                     animate={isInView ? 'visible' : 'hidden'}
                     variants={{ ...fadeUp, visible: { ...fadeUp.visible, transition: { delay: 0.3, duration: 0.6 } } }}
                 >
-                    <form className="contact-form" onSubmit={handleSubmit}>
+                    <form className="contact-form" onSubmit={handleSubmit} aria-label="Contact form">
                         <div className="form-row">
                             <div className="form-group">
                                 <label htmlFor="name">Your Name</label>
@@ -108,6 +111,7 @@ export default function Contact() {
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
+                                    autoComplete="name"
                                 />
                             </div>
                             <div className="form-group">
@@ -120,6 +124,7 @@ export default function Contact() {
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
+                                    autoComplete="email"
                                 />
                             </div>
                         </div>
@@ -146,8 +151,13 @@ export default function Contact() {
                                 required
                             />
                         </div>
+                        {sent && (
+                            <p style={{ color: 'var(--accent-secondary)', fontSize: '0.9rem', fontWeight: 600 }}>
+                                Message ready! Your email client has been opened. Thank you!
+                            </p>
+                        )}
                         <button type="submit" className="btn-primary" style={{ alignSelf: 'flex-start' }}>
-                            Send Message <Send size={18} />
+                            Send Message <Send size={18} aria-hidden="true" />
                         </button>
                     </form>
                 </motion.div>

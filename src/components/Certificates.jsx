@@ -21,7 +21,7 @@ export default function Certificates() {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section className="section" id="certificates" ref={ref}>
+        <section className="section" id="certificates" ref={ref} aria-label="Certificates and credentials">
             <div className="container">
                 <motion.div
                     style={{ textAlign: 'center', marginBottom: '20px' }}
@@ -54,7 +54,7 @@ export default function Certificates() {
                             }}
                             whileHover={{ y: -4, transition: { duration: 0.2 } }}
                         >
-                            <div className="certificate-icon">
+                            <div className="certificate-icon" aria-hidden="true">
                                 <Award size={24} />
                             </div>
                             <div>

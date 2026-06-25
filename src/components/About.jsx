@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import {
     MapPin,
@@ -19,22 +18,22 @@ const fadeUp = {
 
 const aboutCards = [
     {
-        icon: <Code2 size={28} />,
+        icon: <Code2 size={28} aria-hidden="true" />,
         title: 'Frontend Dev',
         desc: 'React, Tailwind, Responsive UI',
     },
     {
-        icon: <Layers size={28} />,
+        icon: <Layers size={28} aria-hidden="true" />,
         title: 'Backend Dev',
         desc: 'Node.js, Express, REST APIs',
     },
     {
-        icon: <Search size={28} />,
+        icon: <Search size={28} aria-hidden="true" />,
         title: 'SEO Expert',
         desc: 'Google Analytics, Digital Marketing',
     },
     {
-        icon: <Lightbulb size={28} />,
+        icon: <Lightbulb size={28} aria-hidden="true" />,
         title: 'Problem Solver',
         desc: 'Critical Thinking, Leadership',
     },
@@ -45,7 +44,7 @@ export default function About() {
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
     return (
-        <section className="section about" id="about" ref={ref}>
+        <section className="section about" id="about" ref={ref} aria-label="About me">
             <div className="container">
                 <motion.div
                     className="about-info"
@@ -58,36 +57,36 @@ export default function About() {
                     </motion.h2>
 
                     <motion.p className="about-text" variants={fadeUp}>
-                        I&apos;m a passionate MERN Stack Developer from Mohali, Punjab with a
-                        Bachelor&apos;s degree in Computer Application from Rayat Bahra University
-                        (2022–2025). I thrive on building practical, efficient web apps and
+                        I'm a passionate MERN Stack Developer from Mohali, Punjab with a
+                        Bachelor's degree in Computer Application from Rayat Bahra University
+                        (2022&ndash;2025). I thrive on building practical, efficient web apps and
                         constantly push myself to learn the latest technologies.
                     </motion.p>
 
                     <motion.div className="about-details" variants={fadeUp}>
                         <div className="about-detail-item">
-                            <div className="about-detail-icon"><MapPin size={20} /></div>
+                            <div className="about-detail-icon" aria-hidden="true"><MapPin size={20} /></div>
                             <div>
                                 <div className="about-detail-label">Location</div>
                                 <div className="about-detail-value">Mohali (Kharar), Punjab</div>
                             </div>
                         </div>
                         <div className="about-detail-item">
-                            <div className="about-detail-icon"><Mail size={20} /></div>
+                            <div className="about-detail-icon" aria-hidden="true"><Mail size={20} /></div>
                             <div>
                                 <div className="about-detail-label">Email</div>
                                 <div className="about-detail-value">surinder2003k@gmail.com</div>
                             </div>
                         </div>
                         <div className="about-detail-item">
-                            <div className="about-detail-icon"><GraduationCap size={20} /></div>
+                            <div className="about-detail-icon" aria-hidden="true"><GraduationCap size={20} /></div>
                             <div>
                                 <div className="about-detail-label">Degree</div>
-                                <div className="about-detail-value">BCA – 7.82 CGPA</div>
+                                <div className="about-detail-value">BCA &ndash; 7.82 CGPA</div>
                             </div>
                         </div>
                         <div className="about-detail-item">
-                            <div className="about-detail-icon"><Globe size={20} /></div>
+                            <div className="about-detail-icon" aria-hidden="true"><Globe size={20} /></div>
                             <div>
                                 <div className="about-detail-label">Languages</div>
                                 <div className="about-detail-value">English, Punjabi, Hindi</div>
@@ -99,8 +98,9 @@ export default function About() {
                         href="mailto:surinder2003k@gmail.com"
                         className="btn-primary"
                         variants={fadeUp}
+                        aria-label="Send email to surinder2003k@gmail.com"
                     >
-                        Hire Me <Mail size={18} />
+                        Hire Me <Mail size={18} aria-hidden="true" />
                     </motion.a>
                 </motion.div>
 
@@ -117,7 +117,7 @@ export default function About() {
                             variants={fadeUp}
                             whileHover={{ y: -8, transition: { duration: 0.3 } }}
                         >
-                            <div className="about-card-icon">{card.icon}</div>
+                            <div className="about-card-icon" aria-hidden="true">{card.icon}</div>
                             <h3>{card.title}</h3>
                             <p>{card.desc}</p>
                         </motion.div>
