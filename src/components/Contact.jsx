@@ -1,30 +1,71 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useCallback } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Globe } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Globe, MessageSquare, Phone, CheckCircle, Loader2, AlertCircle, ChevronRight } from 'lucide-react';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
+const contactMethods = [
+    {
+        icon: <Mail size={22} />,
+        label: 'Email',
+        value: 'surinder2003k@gmail.com',
+        action: 'mailto:surinder2003k@gmail.com',
+        description: 'Best for project inquiries & collaborations',
+    },
+    {
+        icon: <MessageSquare size={22} />,
+        label: 'Telegram',
+        value: '@surinder2003k',
+        action: 'https://t.me/surinder2003k',
+        description: 'Quick questions & instant replies',
+        external: true,
+    },
+    {
+        icon: <MapPin size={22} />,
+        label: 'Location',
+        value: 'Mohali, Punjab, India',
+        action: null,
+        description: 'Available for remote work worldwide',
+    },
+    {
+        icon: <Phone size={22} />,
+        label: 'Phone',
+        value: '+91 98765 43210',
+        action: 'tel:+919876543210',
+        description: 'For urgent matters only (10 AM - 6 PM IST)',
+    },
+];
+
 export default function Contact() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-100px' });
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-    const [sent, setSent] = useState(false);
+    const [formStatus, setFormStatus] = useState('idle'); // idle, submitting, success, error
 
     const handleChange = useCallback((e) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     }, []);
 
-    const handleSubmit = useCallback((e) => {
+    const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
+        setFormStatus('submitting');
+        
+        // Simulate form submission (replace with actual API call)
         const mailtoLink = `mailto:surinder2003k@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
             `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
         )}`;
+        
+        // Small delay for UX
+        await new Promise(resolve => setTimeout(resolve, 800));
         window.open(mailtoLink);
-        setSent(true);
+        setFormStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
+        
+        // Reset after 5 seconds
+        setTimeout(() => setFormStatus('idle'), 5000);
     }, [formData]);
 
     return (
@@ -34,32 +75,57 @@ export default function Contact() {
                     className="contact-info"
                     initial="hidden"
                     animate={isInView ? 'visible' : 'hidden'}
-                    variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+                    variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
                 >
                     <motion.h2 className="section-title" variants={fadeUp}>
-                        Get In <span className="gradient-text">Touch</span>
+                        Let's <span className="gradient-text">Work Together</span>
                     </motion.h2>
 
                     <motion.p className="contact-text" variants={fadeUp}>
-                        I'm always open to new opportunities, collaborations, and interesting
-                        projects. Feel free to reach out &mdash; let's build something amazing together!
+                        Got a project in mind? A question about my work? Or just want to say hello?
+                        I read every message and usually reply within 24 hours. Let's build something cool.
                     </motion.p>
 
-                    <motion.div className="contact-details" variants={fadeUp}>
-                        <div className="contact-item">
-                            <div className="contact-item-icon" aria-hidden="true"><Mail size={22} /></div>
-                            <div>
-                                <div className="contact-item-label">Email</div>
-                                <div className="contact-item-value">surinder2003k@gmail.com</div>
-                            </div>
-                        </div>
-                        <div className="contact-item">
-                            <div className="contact-item-icon" aria-hidden="true"><MapPin size={22} /></div>
-                            <div>
-                                <div className="contact-item-label">Location</div>
-                                <div className="contact-item-value">Mohali (Kharar), Punjab, India</div>
-                            </div>
-                        </div>
+                    <motion.div className="contact-methods" variants={fadeUp} style={{ marginBottom: '40px' }}>
+                        {contactMethods.map((method, i) => (
+                            <a
+                                key={i}
+                                href={method.action}
+                                target={method.external ? '_blank' : '_self'}
+                                rel={method.external ? 'noopener noreferrer' : ''}
+                                className="contact-method-card"
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'flex-start',
+                                    gap: '16px',
+                                    padding: '20px',
+                                    background: 'var(--bg-card)',
+                                    border: '1px solid var(--border-color)',
+                                    borderRadius: '16px',
+                                    textDecoration: 'none',
+                                    color: 'inherit',
+                                    transition: 'all 0.3s ease',
+                                    marginBottom: '12px',
+                                }}
+                                onMouseOver={(e) => { e.currentTarget.style.borderColor = 'var(--border-glow)'; e.currentTarget.style.transform = 'translateX(4px)'; }}
+                                onMouseOut={(e) => { e.currentTarget.style.borderColor = 'var(--border-color)'; e.currentTarget.style.transform = 'none'; }}
+                            >
+                                <div className="contact-item-icon" style={{ flexShrink: 0, background: 'rgba(108, 99, 255, 0.1)' }}>
+                                    {method.icon}
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                                        <div className="contact-item-label" style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--accent-primary)', fontWeight: 600 }}>
+                                            {method.label}
+                                        </div>
+                                        {method.external && <Globe size={12} style={{ color: 'var(--text-muted)' }} aria-hidden="true" />}
+                                    </div>
+                                    <div className="contact-item-value" style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '4px' }}>{method.value}</div>
+                                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{method.description}</div>
+                                </div>
+                                <ChevronRight size={18} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
+                            </a>
+                        ))}
                     </motion.div>
 
                     <motion.div className="contact-socials" variants={fadeUp}>
@@ -90,6 +156,15 @@ export default function Contact() {
                         >
                             <Globe size={22} />
                         </a>
+                        <a
+                            href="https://t.me/surinder2003k"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="social-link"
+                            aria-label="Telegram (opens in new tab)"
+                        >
+                            <MessageSquare size={22} />
+                        </a>
                     </motion.div>
                 </motion.div>
 
@@ -99,10 +174,10 @@ export default function Contact() {
                     animate={isInView ? 'visible' : 'hidden'}
                     variants={{ ...fadeUp, visible: { ...fadeUp.visible, transition: { delay: 0.3, duration: 0.6 } } }}
                 >
-                    <form className="contact-form" onSubmit={handleSubmit} aria-label="Contact form">
+                    <form className="contact-form" onSubmit={handleSubmit} aria-label="Contact form" noValidate>
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="name">Your Name</label>
+                                <label htmlFor="name">Your Name <span style={{ color: 'var(--accent-tertiary)' }}>*</span></label>
                                 <input
                                     type="text"
                                     id="name"
@@ -112,10 +187,11 @@ export default function Contact() {
                                     onChange={handleChange}
                                     required
                                     autoComplete="name"
+                                    disabled={formStatus === 'submitting'}
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="email">Your Email</label>
+                                <label htmlFor="email">Your Email <span style={{ color: 'var(--accent-tertiary)' }}>*</span></label>
                                 <input
                                     type="email"
                                     id="email"
@@ -125,11 +201,12 @@ export default function Contact() {
                                     onChange={handleChange}
                                     required
                                     autoComplete="email"
+                                    disabled={formStatus === 'submitting'}
                                 />
                             </div>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="subject">Subject</label>
+                            <label htmlFor="subject">Subject <span style={{ color: 'var(--accent-tertiary)' }}>*</span></label>
                             <input
                                 type="text"
                                 id="subject"
@@ -138,27 +215,90 @@ export default function Contact() {
                                 value={formData.subject}
                                 onChange={handleChange}
                                 required
+                                disabled={formStatus === 'submitting'}
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="message">Message</label>
+                            <label htmlFor="message">Message <span style={{ color: 'var(--accent-tertiary)' }}>*</span></label>
                             <textarea
                                 id="message"
                                 name="message"
-                                placeholder="Tell me about your project..."
+                                placeholder="Tell me about your project, timeline, budget... or just say hi!"
                                 value={formData.message}
                                 onChange={handleChange}
                                 required
+                                rows={5}
+                                disabled={formStatus === 'submitting'}
                             />
                         </div>
-                        {sent && (
-                            <p style={{ color: 'var(--accent-secondary)', fontSize: '0.9rem', fontWeight: 600 }}>
-                                Message ready! Your email client has been opened. Thank you!
-                            </p>
+                        
+                        {formStatus === 'success' && (
+                            <motion.div
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                    padding: '16px',
+                                    background: 'rgba(0, 212, 170, 0.15)',
+                                    border: '1px solid rgba(0, 212, 170, 0.3)',
+                                    borderRadius: '12px',
+                                    color: 'var(--accent-secondary)',
+                                    fontSize: '0.95rem',
+                                    fontWeight: 600,
+                                    marginBottom: '20px',
+                                }}
+                            >
+                                <CheckCircle size={20} aria-hidden="true" />
+                                <span>Message ready! Your email client has been opened. I'll get back to you soon.</span>
+                            </motion.div>
                         )}
-                        <button type="submit" className="btn-primary" style={{ alignSelf: 'flex-start' }}>
-                            Send Message <Send size={18} aria-hidden="true" />
+                        
+                        {formStatus === 'error' && (
+                            <motion.div
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                    padding: '16px',
+                                    background: 'rgba(255, 107, 157, 0.15)',
+                                    border: '1px solid rgba(255, 107, 157, 0.3)',
+                                    borderRadius: '12px',
+                                    color: 'var(--accent-tertiary)',
+                                    fontSize: '0.95rem',
+                                    fontWeight: 600,
+                                    marginBottom: '20px',
+                                }}
+                            >
+                                <AlertCircle size={20} aria-hidden="true" />
+                                <span>Something went wrong. Please try emailing me directly at surinder2003k@gmail.com</span>
+                            </motion.div>
+                        )}
+
+                        <button 
+                            type="submit" 
+                            className="btn-primary" 
+                            style={{ alignSelf: 'flex-start', minWidth: '180px' }}
+                            disabled={formStatus === 'submitting'}
+                        >
+                            {formStatus === 'submitting' ? (
+                                <>
+                                    <Loader2 size={18} aria-hidden="true" className="spinning" />
+                                    Sending...
+                                </>
+                            ) : (
+                                <>
+                                    Send Message <Send size={18} aria-hidden="true" />
+                                </>
+                            )}
                         </button>
+                        
+                        <p style={{ marginTop: '16px', fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center' }}>
+                            By submitting, you agree to share your info for project discussion. No spam, ever.
+                        </p>
                     </form>
                 </motion.div>
             </div>

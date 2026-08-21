@@ -12,16 +12,16 @@ const LoadingScreen = ({ onComplete }) => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.3,
+                staggerChildren: 0.08,
+                delayChildren: 0.2,
             },
         },
         exit: {
             y: -1000,
             transition: {
                 ease: "easeInOut",
-                duration: 0.8,
-                delay: 0.5,
+                duration: 0.6,
+                delay: 0.3,
             },
         },
     };
@@ -57,7 +57,7 @@ const LoadingScreen = ({ onComplete }) => {
         const timer = setTimeout(() => {
             setIsVisible(false);
             if (onComplete) onComplete();
-        }, 3000); // Animation duration
+        }, 1800); // Reduced from 3000ms
 
         return () => clearTimeout(timer);
     }, [onComplete]);
@@ -106,7 +106,7 @@ const LoadingScreen = ({ onComplete }) => {
                     className="loading-progress-bar"
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
-                    transition={{ duration: 2.5, ease: "easeInOut", delay: 0.5 }}
+                    transition={{ duration: 1.5, ease: "easeInOut", delay: 0.3 }}
                 />
             </div>
         </motion.div>

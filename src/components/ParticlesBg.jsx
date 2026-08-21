@@ -1,22 +1,29 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 
 export default function ParticlesBg() {
     const canvasRef = useRef(null);
+    const particlesRef = useRef([]);
+    const animationIdRef = useRef(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
-        let animationId;
+        
+        // Reduce particle count for better performance
+        const PARTICLE_COUNT = 40;
+        const CONNECTION_DISTANCE = 100;
+        
         let particles = [];
+        let width = 0;
+        let height = 0;
 
         const resize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
         };
-
-        resize();
-        window.addEventListener('resize', resize);
 
         class Particle {
             constructor() {
@@ -24,21 +31,21 @@ export default function ParticlesBg() {
             }
 
             reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.4;
-                this.speedY = (Math.random() - 0.5) * 0.4;
-                this.opacity = Math.random() * 0.4 + 0.1;
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.3 + 0.05;
             }
 
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                else if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                else if (this.y < 0) this.y = canvas.height;
+                if (this.x > width) this.x = 0;
+                else if (this.x < 0) this.x = width;
+                if (this.y > height) this.y = 0;
+                else if (this.y < 0) this.y = height;
             }
 
             draw() {
@@ -51,8 +58,7 @@ export default function ParticlesBg() {
 
         const init = () => {
             particles = [];
-            const count = Math.min(60, Math.floor((canvas.width * canvas.height) / 18000));
-            for (let i = 0; i < count; i++) {
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
                 particles.push(new Particle());
             }
         };
@@ -63,9 +69,9 @@ export default function ParticlesBg() {
                     const dx = particles[a].x - particles[b].x;
                     const dy = particles[a].y - particles[b].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) {
-                        ctx.strokeStyle = `rgba(108, 99, 255, ${0.06 * (1 - dist / 120)})`;
-                        ctx.lineWidth = 0.6;
+                    if (dist < CONNECTION_DISTANCE) {
+                        ctx.strokeStyle = `rgba(108, 99, 255, ${0.04 * (1 - dist / CONNECTION_DISTANCE)})`;
+                        ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
                         ctx.lineTo(particles[b].x, particles[b].y);
@@ -76,22 +82,25 @@ export default function ParticlesBg() {
         };
 
         const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, width, height);
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
             }
             connectParticles();
-            animationId = requestAnimationFrame(animate);
+            animationIdRef.current = requestAnimationFrame(animate);
         };
 
+        resize();
+        window.addEventListener('resize', resize);
         init();
         animate();
 
         return () => {
             window.removeEventListener('resize', resize);
-            cancelAnimationFrame(animationId);
-            particles = [];
+            if (animationIdRef.current) {
+                cancelAnimationFrame(animationIdRef.current);
+            }
         };
     }, []);
 
