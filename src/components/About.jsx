@@ -62,7 +62,7 @@ export default function About() {
                     variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
                 >
                     <motion.h2 className="section-title" variants={fadeUp}>
-                        About <span className="gradient-text">Me</span>
+                        About Me
                     </motion.h2>
 
                     <motion.p className="about-text" variants={fadeUp}>

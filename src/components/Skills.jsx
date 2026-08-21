@@ -106,7 +106,7 @@ export default function Skills() {
                     variants={fadeUp}
                 >
                     <h2 className="section-title">
-                        My <span className="gradient-text">Toolkit</span>
+                        My Toolkit
                     </h2>
                     <p className="section-subtitle" style={{ margin: '0 auto' }}>
                         Technologies I use daily. Levels reflect real project experience — not tutorial completion.
@@ -163,14 +163,14 @@ export default function Skills() {
                                         fontSize: '1.5rem',
                                         fontWeight: 700,
                                         fontFamily: 'var(--font-display)',
-                                        background: `linear-gradient(135deg, ${category.skills[0].color}, ${category.skills[1]?.color || category.skills[0].color})`,
+                                        background: category.skills[0].color,
                                         WebkitBackgroundClip: 'text',
                                         WebkitTextFillColor: 'transparent',
                                         backgroundClip: 'text',
                                     }}>
                                         {avgLevel}%
                                     </span>
-                                    {isExpanded ? <ChevronUp size={20} color="var(--accent-primary)" /> : <ChevronDown size={20} color="var(--text-muted)" />}
+                                    {isExpanded ? <ChevronUp size={20} color="var(--primary)" /> : <ChevronDown size={20} color="var(--text-muted)" />}
                                 </div>
                             </button>
 
@@ -224,7 +224,7 @@ export default function Skills() {
                                                     transition={{ delay: ci * 0.08 + si * 0.04 + 0.2, duration: 0.8, ease: 'easeOut' }}
                                                     style={{
                                                         height: '100%',
-                                                        background: `linear-gradient(90deg, ${skill.color}, ${skill.color}aa)`,
+                                                        background: skill.color,
                                                         borderRadius: '3px',
                                                         transformOrigin: 'left',
                                                     }}

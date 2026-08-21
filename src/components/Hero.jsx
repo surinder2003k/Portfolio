@@ -1,22 +1,22 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
-import { ArrowDown, Code2, Server, Palette, Sparkles } from 'lucide-react';
+import { ArrowDown, MapPin, Code2, Server, Palette, Database } from 'lucide-react';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
     visible: (i = 0) => ({
         opacity: 1,
         y: 0,
-        transition: { delay: i * 0.12, duration: 0.5, ease: 'easeOut' },
+        transition: { delay: i * 0.1, duration: 0.5, ease: 'easeOut' },
     }),
 };
 
 const DEFAULTS = {
-    greeting: 'Hey there, I\'m',
+    greeting: 'Hey there, I’m',
     name: 'Surinder Kumar',
-    role: 'Full Stack MERN Developer • SEO Specialist • AI Enthusiast',
-    description: 'I turn coffee into clean code. Building production-ready web apps with React, Node.js & MongoDB since 2022. When I\'m not debugging at 2 AM, I\'m optimizing sites for search rankings or experimenting with AI tools. Based in Mohali, Punjab — shipping worldwide 🌍',
+    role: 'Full Stack MERN Developer · SEO Specialist · AI Enthusiast',
+    description: 'I turn coffee into clean code. Building production-ready web apps with React, Node.js & MongoDB since 2022. When I’m not debugging at 2 AM, I’m optimizing sites for search rankings or experimenting with AI tools. Based in Mohali, Punjab — shipping worldwide.',
     stats: [
         { value: '15+', label: 'Projects Shipped' },
         { value: '3+', label: 'Years Coding' },
@@ -37,22 +37,29 @@ function loadHero() {
     return DEFAULTS;
 }
 
+const techChips = [
+    { icon: Code2, label: 'React.js', color: '#61dafb' },
+    { icon: Server, label: 'Node.js', color: '#68a063' },
+    { icon: Database, label: 'MongoDB', color: '#4db33d' },
+    { icon: Palette, label: 'UI/UX', color: '#f59e0b' },
+];
+
 export default function Hero() {
     const [content] = useStateInit(loadHero);
     const nameParts = content.name.split(' ');
 
     return (
         <section className="hero" id="hero" aria-label="Hero introduction">
-            <div className="container">
+            <div className="container hero-editorial">
                 <motion.div
                     className="hero-content"
                     initial="hidden"
                     animate="visible"
-                    variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
+                    variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
                 >
                     <motion.div className="hero-badge" variants={fadeUp} custom={0}>
-                        <Sparkles size={14} color="var(--signature-coral)" aria-hidden="true" className="pulse" />
-                        Available for freelance & full-time roles
+                        <span className="hero-badge-dot" aria-hidden="true" />
+                        Available for freelance &amp; full-time roles
                     </motion.div>
 
                     <motion.p className="hero-greeting" variants={fadeUp} custom={1}>
@@ -61,7 +68,7 @@ export default function Hero() {
 
                     <motion.h1 variants={fadeUp} custom={2}>
                         {nameParts.map((w, i) => (
-                            <span key={i} style={{ color: i === nameParts.length - 1 ? 'var(--primary)' : 'inherit' }}>
+                            <span key={i} className={i === nameParts.length - 1 ? 'hero-name-accent' : undefined}>
                                 {w}{i < nameParts.length - 1 ? ' ' : ''}
                             </span>
                         ))}
@@ -75,10 +82,15 @@ export default function Hero() {
                         {content.description}
                     </motion.p>
 
-                    <motion.div className="hero-actions" variants={fadeUp} custom={5}>
+                    <motion.div className="hero-meta" variants={fadeUp} custom={5}>
+                        <MapPin size={15} aria-hidden="true" />
+                        <span>Mohali, Punjab · Open to remote</span>
+                    </motion.div>
+
+                    <motion.div className="hero-actions" variants={fadeUp} custom={6}>
                         <Link to="contact" smooth duration={500} offset={-80}>
                             <button className="btn-primary" aria-label="Navigate to contact section">
-                                Let's Build Something
+                                Let’s Build Something
                                 <ArrowDown size={18} aria-hidden="true" />
                             </button>
                         </Link>
@@ -89,7 +101,7 @@ export default function Hero() {
                         </Link>
                     </motion.div>
 
-                    <motion.div className="hero-stats" variants={fadeUp} custom={6}>
+                    <motion.div className="hero-stats" variants={fadeUp} custom={7}>
                         {content.stats.map((s, i) => (
                             <div className="hero-stat" key={i}>
                                 <h3>{s.value}</h3>
@@ -99,31 +111,34 @@ export default function Hero() {
                     </motion.div>
                 </motion.div>
 
-                <motion.div
-                    className="hero-visual"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.3, duration: 0.7, ease: 'easeOut' }}
-                    role="img"
-                    aria-label="Surinder Kumar developer avatar with floating tech badges"
+                <motion.aside
+                    className="hero-aside"
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.25, duration: 0.7, ease: 'easeOut' }}
+                    aria-label="Tech I work with"
                 >
-                    <div className="hero-avatar-wrapper">
-                        <div className="hero-avatar-ring" aria-hidden="true" />
-                        <div className="hero-avatar" aria-hidden="true">
-                            {nameParts[0]?.[0] || 'S'}{nameParts[nameParts.length - 1]?.[0] || 'K'}
-                        </div>
-
-                        <motion.div className="hero-floating-badge floating-badge-1" animate={{ y: [0, -12, 0] }} transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}>
-                            <Code2 size={16} color="#61dafb" aria-hidden="true" /> React.js
-                        </motion.div>
-                        <motion.div className="hero-floating-badge floating-badge-2" animate={{ y: [0, -12, 0] }} transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut', delay: 1 }}>
-                            <Server size={16} color="#68a063" aria-hidden="true" /> Node.js
-                        </motion.div>
-                        <motion.div className="hero-floating-badge floating-badge-3" animate={{ y: [0, -12, 0] }} transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut', delay: 2 }}>
-                            <Palette size={16} color="#4db33d" aria-hidden="true" /> MongoDB
-                        </motion.div>
+                    <div className="hero-card">
+                        <p className="hero-card-eyebrow">Currently shipping with</p>
+                        <ul className="hero-tech-list">
+                            {techChips.map((t, i) => {
+                                const Icon = t.icon;
+                                return (
+                                    <li className="hero-tech-item" key={i}>
+                                        <span className="hero-tech-icon" style={{ color: t.color, borderColor: t.color }} aria-hidden="true">
+                                            <Icon size={18} />
+                                        </span>
+                                        <span className="hero-tech-label">{t.label}</span>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                        <div className="hero-card-divider" />
+                        <p className="hero-card-note">
+                            Production apps · SEO-optimized · AI-powered · Deployed worldwide
+                        </p>
                     </div>
-                </motion.div>
+                </motion.aside>
             </div>
         </section>
     );

@@ -64,7 +64,7 @@ export default function Testimonials() {
                     variants={fadeUp}
                 >
                     <h2 className="section-title">
-                        What <span className="gradient-text">Clients Say</span>
+                        What Clients Say
                     </h2>
                     <p className="section-subtitle" style={{ margin: '0 auto' }}>
                         Real feedback from real projects. No fake reviews, no generic praise.
@@ -104,7 +104,7 @@ export default function Testimonials() {
                                     width: '56px', 
                                     height: '56px', 
                                     borderRadius: '50%', 
-                                    background: 'var(--accent-gradient)', 
+                                    background: 'var(--surface-dark)', 
                                     display: 'flex', 
                                     alignItems: 'center', 
                                     justifyContent: 'center', 
@@ -134,12 +134,12 @@ export default function Testimonials() {
                                     marginTop: '16px', 
                                     fontSize: '0.75rem', 
                                     fontWeight: 600, 
-                                    color: 'var(--accent-secondary)',
+                                    color: 'var(--text-secondary)',
                                     textDecoration: 'none',
                                     transition: 'color 0.2s ease',
                                 }}
-                                onMouseOver={(e) => e.currentTarget.style.color = 'var(--accent-primary)'}
-                                onMouseOut={(e) => e.currentTarget.style.color = 'var(--accent-secondary)'}
+                                onMouseOver={(e) => e.currentTarget.style.color = 'var(--primary)'}
+                                onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
                                 aria-label={`View ${testimonial.name}'s recommendation on ${testimonial.platform}`}
                             >
                                 {testimonial.platform === 'LinkedIn' && <Linkedin size={12} aria-hidden="true" />}

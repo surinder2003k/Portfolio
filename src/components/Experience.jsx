@@ -82,9 +82,9 @@ export default function Experience() {
     };
 
     const typeColors = {
-        work: 'var(--accent-secondary)',
-        internship: 'var(--accent-primary)',
-        training: 'var(--accent-tertiary)',
+        work: 'var(--text-secondary)',
+        internship: 'var(--primary)',
+        training: 'var(--signature-coral)',
         education: '#38bdf8',
     };
 
@@ -104,7 +104,7 @@ export default function Experience() {
                     variants={fadeUp}
                 >
                     <h2 className="section-title">
-                        Experience & <span className="gradient-text">Journey</span>
+                        Experience & Journey
                     </h2>
                     <p className="section-subtitle" style={{ margin: '0 auto' }}>
                         From writing my first <code>console.log</code> to shipping production apps — here's the path.

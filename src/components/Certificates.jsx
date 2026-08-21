@@ -72,7 +72,7 @@ export default function Certificates() {
                     variants={fadeUp}
                 >
                     <h2 className="section-title">
-                        <span className="gradient-text">Certificates</span> & Credentials
+                        Certificates & Credentials
                     </h2>
                     <p className="section-subtitle" style={{ margin: '0 auto' }}>
                         Verified credentials that back up what I claim. Most have public verification links.
@@ -125,12 +125,12 @@ export default function Certificates() {
                                             gap: '6px',
                                             fontSize: '0.75rem',
                                             fontWeight: 600,
-                                            color: 'var(--accent-secondary)',
+                                            color: 'var(--text-secondary)',
                                             textDecoration: 'none',
                                             transition: 'color 0.2s ease',
                                         }}
-                                        onMouseOver={(e) => { e.currentTarget.style.color = 'var(--accent-primary)'; }}
-                                        onMouseOut={(e) => { e.currentTarget.style.color = 'var(--accent-secondary)'; }}
+                                        onMouseOver={(e) => { e.currentTarget.style.color = 'var(--primary)'; }}
+                                        onMouseOut={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; }}
                                         aria-label={`Verify ${cert.title} certificate`}
                                     >
                                         <CheckCircle size={12} aria-hidden="true" /> Verify

@@ -113,7 +113,7 @@ export default function Contact() {
                     variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
                 >
                     <motion.h2 className="section-title" variants={fadeUp}>
-                        Let's <span className="gradient-text">Work Together</span>
+                        Let's Work Together
                     </motion.h2>
 
                     <motion.p className="contact-text" variants={fadeUp}>
@@ -150,7 +150,7 @@ export default function Contact() {
                                 </div>
                                 <div style={{ flex: 1 }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                                        <div className="contact-item-label" style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--accent-primary)', fontWeight: 600 }}>
+                                        <div className="contact-item-label" style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--primary)', fontWeight: 600 }}>
                                             {method.label}
                                         </div>
                                         {method.external && <Globe size={12} style={{ color: 'var(--text-muted)' }} aria-hidden="true" />}
@@ -212,7 +212,7 @@ export default function Contact() {
                     <form className="contact-form" onSubmit={handleSubmit} aria-label="Contact form" noValidate>
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="name">Your Name <span style={{ color: 'var(--accent-tertiary)' }}>*</span></label>
+                                <label htmlFor="name">Your Name <span style={{ color: 'var(--signature-coral)' }}>*</span></label>
                                 <input
                                     type="text"
                                     id="name"
@@ -226,7 +226,7 @@ export default function Contact() {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="email">Your Email <span style={{ color: 'var(--accent-tertiary)' }}>*</span></label>
+                                <label htmlFor="email">Your Email <span style={{ color: 'var(--signature-coral)' }}>*</span></label>
                                 <input
                                     type="email"
                                     id="email"
@@ -241,7 +241,7 @@ export default function Contact() {
                             </div>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="subject">Subject <span style={{ color: 'var(--accent-tertiary)' }}>*</span></label>
+                            <label htmlFor="subject">Subject <span style={{ color: 'var(--signature-coral)' }}>*</span></label>
                             <input
                                 type="text"
                                 id="subject"
@@ -254,7 +254,7 @@ export default function Contact() {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="message">Message <span style={{ color: 'var(--accent-tertiary)' }}>*</span></label>
+                            <label htmlFor="message">Message <span style={{ color: 'var(--signature-coral)' }}>*</span></label>
                             <textarea
                                 id="message"
                                 name="message"
@@ -279,7 +279,7 @@ export default function Contact() {
                                     background: 'rgba(0, 212, 170, 0.15)',
                                     border: '1px solid rgba(0, 212, 170, 0.3)',
                                     borderRadius: '12px',
-                                    color: 'var(--accent-secondary)',
+                                    color: 'var(--text-secondary)',
                                     fontSize: '0.95rem',
                                     fontWeight: 600,
                                     marginBottom: '20px',
@@ -302,7 +302,7 @@ export default function Contact() {
                                     background: 'rgba(255, 107, 157, 0.15)',
                                     border: '1px solid rgba(255, 107, 157, 0.3)',
                                     borderRadius: '12px',
-                                    color: 'var(--accent-tertiary)',
+                                    color: 'var(--signature-coral)',
                                     fontSize: '0.95rem',
                                     fontWeight: 600,
                                     marginBottom: '20px',

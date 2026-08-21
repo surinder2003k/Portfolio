@@ -15,7 +15,7 @@ const projects = [
         tags: ['React', 'AI Integration', 'Tailwind CSS', 'Vercel'],
         live: 'https://xylosai.vercel.app/',
         github: 'https://github.com/surinder2003k/Xylos-AI',
-        gradient: 'linear-gradient(135deg, #6c63ff, #a855f7)',
+        color: '#181d26',
         initials: 'XA',
         featured: true,
         metrics: '2.5k+ monthly users',
@@ -26,7 +26,7 @@ const projects = [
         tags: ['React 19', 'Vite', 'Tailwind CSS', 'AI'],
         live: 'https://aichatapp-8ksusdph.manus.space',
         github: 'https://github.com/surinder2003k/Asky',
-        gradient: 'linear-gradient(135deg, #00d4aa, #38bdf8)',
+        color: '#0a2e0e',
         initials: 'AK',
         featured: true,
         metrics: 'Privacy-first, no-auth',
@@ -37,7 +37,7 @@ const projects = [
         tags: ['Next.js', 'AI', 'Blog Platform', 'Analytics'],
         live: 'https://pulse-blog-ai.vercel.app/',
         github: 'https://github.com/surinder2003k/Pulse-AI',
-        gradient: 'linear-gradient(135deg, #ff6b9d, #f59e0b)',
+        color: '#aa2d00',
         initials: 'PA',
         featured: true,
         metrics: '500+ articles generated',
@@ -48,7 +48,7 @@ const projects = [
         tags: ['React', 'Node.js', 'MongoDB', 'Express'],
         live: 'https://pathseekers.vercel.app/',
         github: 'https://github.com/surinder2003k/pathseekers',
-        gradient: 'linear-gradient(135deg, #38bdf8, #6c63ff)',
+        color: '#181d26',
         initials: 'PS',
         featured: true,
         metrics: '1k+ registered students',
@@ -59,7 +59,7 @@ const projects = [
         tags: ['React', 'Three.js', 'Framer Motion', 'Creative'],
         live: 'https://xeloria.vercel.app/',
         github: 'https://github.com/surinder2003k/Xeloria',
-        gradient: 'linear-gradient(135deg, #f59e0b, #38bdf8)',
+        color: '#aa2d00',
         initials: 'XR',
         featured: false,
         metrics: 'Creative coding',
@@ -87,7 +87,7 @@ export default function Projects() {
                     variants={fadeUp}
                 >
                     <h2 className="section-title">
-                        Featured <span className="gradient-text">Projects</span>
+                        Featured Projects
                     </h2>
                     <p className="section-subtitle" style={{ margin: '0 auto' }}>
                         My top 5 flagship builds — each one shipped, deployed, and solving a real problem.
@@ -112,7 +112,7 @@ export default function Projects() {
                             }}
                             whileHover={{ y: -8, transition: { duration: 0.3 } }}
                         >
-                            <div className="project-image" style={{ background: project.gradient }} aria-hidden="true">
+                            <div className="project-image" style={{ background: project.color }} aria-hidden="true">
                                 {project.initials}
                                 {project.featured && (
                                     <span className="project-featured-badge">Featured</span>
@@ -127,7 +127,7 @@ export default function Projects() {
 
                             <h3>{project.title}</h3>
                             <p>{project.desc}</p>
-                            <div className="project-metrics" style={{ marginBottom: '16px', fontSize: '0.85rem', color: 'var(--accent-secondary)', fontWeight: 600 }}>
+                            <div className="project-metrics" style={{ marginBottom: '16px', fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
                                 {project.metrics}
                             </div>
 
@@ -174,7 +174,7 @@ export default function Projects() {
                                 variants={fadeUp}
                                 whileHover={{ y: -6, transition: { duration: 0.3 } }}
                             >
-                                <div className="about-card-icon" aria-hidden="true" style={{ marginBottom: '16px', background: 'rgba(108, 99, 255, 0.1)', color: 'var(--accent-primary)' }}>{highlight.icon}</div>
+                                <div className="about-card-icon" aria-hidden="true" style={{ marginBottom: '16px', background: 'var(--bg-secondary)', color: 'var(--ink)' }}>{highlight.icon}</div>
                                 <div style={{ fontSize: '1.2rem', fontWeight: 700, fontFamily: 'var(--font-display)', marginBottom: '4px' }}>{highlight.value}</div>
                                 <div style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '4px' }}>{highlight.label}</div>
                                 <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', lineHeight: 1.5 }}>{highlight.desc}</p>
