@@ -63,7 +63,7 @@ export default function Login({ onBack }) {
                                 type="text"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
-                                placeholder="sunny"
+                                placeholder="Enter your username"
                                 autoComplete="username"
                                 required
                             />
@@ -79,7 +79,7 @@ export default function Login({ onBack }) {
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="••••"
+                                placeholder="Enter your password"
                                 autoComplete="current-password"
                                 required
                             />

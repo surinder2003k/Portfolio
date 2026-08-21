@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-scroll';
 import { motion } from 'framer-motion';
-import { Menu, X, Sun, Moon, Lock } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/useTheme';
 
 const navItems = [
@@ -81,14 +81,6 @@ export default function Navbar() {
                     >
                         {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                     </button>
-
-                    <a
-                        href="/login"
-                        className="btn-primary nav-cta"
-                        aria-label="Admin login"
-                    >
-                        <Lock size={14} /> Login
-                    </a>
                 </div>
 
                 <button

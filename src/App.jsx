@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-scroll';
 import { AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
@@ -11,7 +12,6 @@ import Certificates from './components/Certificates';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import ParticlesBg from './components/ParticlesBg';
 import LoadingScreen from './components/LoadingScreen';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
@@ -59,7 +59,6 @@ export default function App() {
                     <LoadingScreen key="loading" onComplete={() => setLoading(false)} />
                 ) : (
                     <div key="content">
-                        <ParticlesBg />
                         <Navbar />
                         <main>
                             <Hero />
@@ -69,6 +68,16 @@ export default function App() {
                             <Projects />
                             <Certificates />
                             <Testimonials />
+
+                            <section className="signature-band container" aria-label="Work together callout">
+                                <div className="signature-card coral">
+                                    <h2>Let's build something that ships.</h2>
+                                    <p>I turn ideas into production-ready web apps with React, Node.js and MongoDB. Available for freelance and full-time work — worldwide.</p>
+                                    <Link to="contact" smooth duration={500} offset={-80}>
+                                        <button className="btn-outline">Start a project</button>
+                                    </Link>
+                                </div>
+                            </section>
                             <Contact />
                         </main>
                         <Footer />

@@ -43,8 +43,6 @@ export default function Hero() {
 
     return (
         <section className="hero" id="hero" aria-label="Hero introduction">
-            <div className="hero-bg-grid" aria-hidden="true" />
-
             <div className="container">
                 <motion.div
                     className="hero-content"
@@ -53,7 +51,7 @@ export default function Hero() {
                     variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
                 >
                     <motion.div className="hero-badge" variants={fadeUp} custom={0}>
-                        <Sparkles size={14} color="var(--accent-2)" aria-hidden="true" className="pulse" />
+                        <Sparkles size={14} color="var(--signature-coral)" aria-hidden="true" className="pulse" />
                         Available for freelance & full-time roles
                     </motion.div>
 
@@ -63,7 +61,7 @@ export default function Hero() {
 
                     <motion.h1 variants={fadeUp} custom={2}>
                         {nameParts.map((w, i) => (
-                            <span key={i} style={{ color: i === nameParts.length - 1 ? 'var(--accent)' : 'inherit' }}>
+                            <span key={i} style={{ color: i === nameParts.length - 1 ? 'var(--primary)' : 'inherit' }}>
                                 {w}{i < nameParts.length - 1 ? ' ' : ''}
                             </span>
                         ))}
