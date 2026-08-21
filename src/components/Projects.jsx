@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ExternalLink, Github, Star, Zap, Shield, TrendingUp } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -66,12 +66,6 @@ const projects = [
     },
 ];
 
-const projectHighlights = [
-    { icon: <Zap size={20} />, label: 'Performance', value: '95+ Lighthouse', desc: 'Optimized Core Web Vitals' },
-    { icon: <Shield size={20} />, label: 'Security', value: 'A+ Headers', desc: 'CSP, HSTS, XSS protection' },
-    { icon: <TrendingUp size={20} />, label: 'SEO Ready', value: '100/100 Score', desc: 'Meta tags, structured data' },
-    { icon: <Star size={20} />, label: 'Accessibility', value: 'WCAG 2.1 AA', desc: 'Semantic HTML, ARIA labels' },
-];
 
 export default function Projects() {
     const ref = useRef(null);
@@ -154,34 +148,6 @@ export default function Projects() {
                         </motion.article>
                     ))}
                 </div>
-
-                <motion.div
-                    className="project-highlights"
-                    initial="hidden"
-                    animate={isInView ? 'visible' : 'hidden'}
-                    variants={{ visible: { transition: { staggerChildren: 0.1, delayChildren: 0.3 } } }}
-                    style={{ marginTop: '60px' }}
-                >
-                    <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 600, textAlign: 'center', marginBottom: '30px', color: 'var(--text-secondary)' }}>
-                        What Makes These Projects Different
-                    </h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
-                        {projectHighlights.map((highlight, i) => (
-                            <motion.div
-                                key={i}
-                                className="glass-card"
-                                style={{ textAlign: 'center', padding: '28px 20px' }}
-                                variants={fadeUp}
-                                whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                            >
-                                <div className="about-card-icon" aria-hidden="true" style={{ marginBottom: '16px', background: 'var(--bg-secondary)', color: 'var(--ink)' }}>{highlight.icon}</div>
-                                <div style={{ fontSize: '1.2rem', fontWeight: 700, fontFamily: 'var(--font-display)', marginBottom: '4px' }}>{highlight.value}</div>
-                                <div style={{ fontSize: '0.9rem', fontWeight: 600, marginBottom: '4px' }}>{highlight.label}</div>
-                                <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', lineHeight: 1.5 }}>{highlight.desc}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </motion.div>
             </div>
         </section>
     );

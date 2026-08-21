@@ -9,8 +9,6 @@ import {
     Layers,
     Search,
     Lightbulb,
-    Coffee,
-    Terminal,
 } from 'lucide-react';
 
 const fadeUp = {
@@ -41,12 +39,6 @@ const aboutCards = [
     },
 ];
 
-const funFacts = [
-    { icon: <Coffee size={20} aria-hidden="true" />, label: 'Coffee/week', value: '14+' },
-    { icon: <Terminal size={20} aria-hidden="true" />, label: 'Lines of code', value: '500k+' },
-    { icon: <Code2 size={20} aria-hidden="true" />, label: 'Side projects', value: '12+' },
-    { icon: <Globe size={20} aria-hidden="true" />, label: 'Countries reached', value: '8+' },
-];
 
 export default function About() {
     const ref = useRef(null);
@@ -134,21 +126,6 @@ export default function About() {
                             <div className="about-card-icon" aria-hidden="true">{card.icon}</div>
                             <h3>{card.title}</h3>
                             <p>{card.desc}</p>
-                        </motion.div>
-                    ))}
-                </motion.div>
-
-                <motion.div
-                    className="about-fun-facts"
-                    initial="hidden"
-                    animate={isInView ? 'visible' : 'hidden'}
-                    variants={{ visible: { transition: { staggerChildren: 0.08, delayChildren: 0.4 } } }}
-                >
-                    {funFacts.map((fact, i) => (
-                        <motion.div key={i} className="fun-fact" variants={fadeUp}>
-                            <div className="fun-fact-icon" aria-hidden="true">{fact.icon}</div>
-                            <div className="fun-fact-value">{fact.value}</div>
-                            <div className="fun-fact-label">{fact.label}</div>
                         </motion.div>
                     ))}
                 </motion.div>

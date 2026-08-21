@@ -9,7 +9,6 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Certificates from './components/Certificates';
-import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
@@ -67,7 +66,6 @@ export default function App() {
                             <Skills />
                             <Projects />
                             <Certificates />
-                            <Testimonials />
 
                             <section className="signature-band container" aria-label="Work together callout">
                                 <div className="signature-card coral">

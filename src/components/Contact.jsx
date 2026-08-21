@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useCallback } from 'react';
-import { Mail, MapPin, Send, Github, Linkedin, Globe, MessageSquare, Phone, CheckCircle, Loader2, AlertCircle, ChevronRight } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Globe, CheckCircle, Loader2, AlertCircle, ChevronRight } from 'lucide-react';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -16,13 +16,10 @@ function loadContact() {
                 const social = c.social || {};
                 return {
                     email: c.contact.email || 'surinder2003k@gmail.com',
-                    telegram: c.contact.telegram || '@surinder2003k',
                     location: c.contact.location || 'Mohali, Punjab, India',
-                    phone: c.contact.phone || '+91 98765 43210',
                     github: social.github || 'https://github.com/surinder2003k',
                     linkedin: social.linkedin || 'https://linkedin.com/in/surinder-web-dev',
                     website: social.website || 'https://surinder.free.nf',
-                    telegramUrl: social.telegram || 'https://t.me/surinder2003k',
                 };
             }
         }
@@ -31,13 +28,10 @@ function loadContact() {
     }
     return {
         email: 'surinder2003k@gmail.com',
-        telegram: '@surinder2003k',
         location: 'Mohali, Punjab, India',
-        phone: '+91 98765 43210',
         github: 'https://github.com/surinder2003k',
         linkedin: 'https://linkedin.com/in/surinder-web-dev',
         website: 'https://surinder.free.nf',
-        telegramUrl: 'https://t.me/surinder2003k',
     };
 }
 
@@ -57,26 +51,11 @@ export default function Contact() {
             description: 'Best for project inquiries & collaborations',
         },
         {
-            icon: <MessageSquare size={22} />,
-            label: 'Telegram',
-            value: contact.telegram,
-            action: contact.telegramUrl,
-            description: 'Quick questions & instant replies',
-            external: true,
-        },
-        {
             icon: <MapPin size={22} />,
             label: 'Location',
             value: contact.location,
             action: null,
             description: 'Available for remote work worldwide',
-        },
-        {
-            icon: <Phone size={22} />,
-            label: 'Phone',
-            value: contact.phone,
-            action: `tel:${contact.phone.replace(/\s/g, '')}`,
-            description: 'For urgent matters only (10 AM - 6 PM IST)',
         },
     ];
 
@@ -135,15 +114,15 @@ export default function Contact() {
                                     gap: '16px',
                                     padding: '20px',
                                     background: 'var(--bg-card)',
-                                    border: '1px solid var(--border-color)',
+                                    border: '1px solid var(--hairline)',
                                     borderRadius: '16px',
                                     textDecoration: 'none',
                                     color: 'inherit',
                                     transition: 'all 0.3s ease',
                                     marginBottom: '12px',
                                 }}
-                                onMouseOver={(e) => { e.currentTarget.style.borderColor = 'var(--border-glow)'; e.currentTarget.style.transform = 'translateX(4px)'; }}
-                                onMouseOut={(e) => { e.currentTarget.style.borderColor = 'var(--border-color)'; e.currentTarget.style.transform = 'none'; }}
+                                onMouseOver={(e) => { e.currentTarget.style.borderColor = 'var(--border-strong)'; e.currentTarget.style.transform = 'translateX(4px)'; }}
+                                onMouseOut={(e) => { e.currentTarget.style.borderColor = 'var(--hairline)'; e.currentTarget.style.transform = 'none'; }}
                             >
                                 <div className="contact-item-icon" style={{ flexShrink: 0, background: 'rgba(108, 99, 255, 0.1)' }}>
                                     {method.icon}
@@ -191,16 +170,7 @@ export default function Contact() {
                         >
                             <Globe size={22} />
                         </a>
-                        <a
-                            href={contact.telegramUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="social-link"
-                            aria-label="Telegram (opens in new tab)"
-                        >
-                            <MessageSquare size={22} />
-                        </a>
-                    </motion.div>
+                        </motion.div>
                 </motion.div>
 
                 <motion.div
