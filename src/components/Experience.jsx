@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState } from 'react';
 import { Briefcase, GraduationCap, Award, Code2, Globe, Star } from 'lucide-react';
 
 const fadeUp = {
@@ -79,13 +79,6 @@ export default function Experience() {
         internship: <GraduationCap size={18} />,
         training: <Code2 size={18} />,
         education: <GraduationCap size={18} />,
-    };
-
-    const typeLabels = {
-        work: 'Work',
-        internship: 'Internship',
-        training: 'Training',
-        education: 'Education',
     };
 
     const typeColors = {

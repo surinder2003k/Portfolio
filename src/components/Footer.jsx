@@ -1,7 +1,7 @@
 import { Link } from 'react-scroll';
 import { Heart } from 'lucide-react';
 
-const footerLinks = ['Home', 'About', 'Experience', 'Skills', 'Projects', 'Testimonials', 'Writing', 'Contact'];
+const footerLinks = ['Home', 'About', 'Experience', 'Skills', 'Projects', 'Testimonials', 'Contact'];
 
 export default function Footer() {
     const year = new Date().getFullYear();

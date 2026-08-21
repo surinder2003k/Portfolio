@@ -1,19 +1,51 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef } from 'react';
+
+class Particle {
+    constructor(ctx, width, height) {
+        this.ctx = ctx;
+        this.width = width;
+        this.height = height;
+        this.reset();
+    }
+
+    reset() {
+        this.x = Math.random() * this.width;
+        this.y = Math.random() * this.height;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.3 + 0.05;
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > this.width) this.x = 0;
+        else if (this.x < 0) this.x = this.width;
+        if (this.y > this.height) this.y = 0;
+        else if (this.y < 0) this.y = this.height;
+    }
+
+    draw() {
+        this.ctx.fillStyle = `rgba(108, 99, 255, ${this.opacity})`;
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        this.ctx.fill();
+    }
+}
 
 export default function ParticlesBg() {
     const canvasRef = useRef(null);
-    const particlesRef = useRef([]);
     const animationIdRef = useRef(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
-        
-        // Reduce particle count for better performance
+
         const PARTICLE_COUNT = 40;
         const CONNECTION_DISTANCE = 100;
-        
+
         let particles = [];
         let width = 0;
         let height = 0;
@@ -25,41 +57,10 @@ export default function ParticlesBg() {
             canvas.height = height;
         };
 
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 1.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.3;
-                this.speedY = (Math.random() - 0.5) * 0.3;
-                this.opacity = Math.random() * 0.3 + 0.05;
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > width) this.x = 0;
-                else if (this.x < 0) this.x = width;
-                if (this.y > height) this.y = 0;
-                else if (this.y < 0) this.y = height;
-            }
-
-            draw() {
-                ctx.fillStyle = `rgba(108, 99, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
         const init = () => {
             particles = [];
             for (let i = 0; i < PARTICLE_COUNT; i++) {
-                particles.push(new Particle());
+                particles.push(new Particle(ctx, width, height));
             }
         };
 

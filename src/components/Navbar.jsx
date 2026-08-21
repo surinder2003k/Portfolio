@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-scroll';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon, Lock } from 'lucide-react';
+import { useTheme } from '../context/useTheme';
 
 const navItems = [
     { name: 'Home', to: 'hero' },
@@ -10,13 +11,13 @@ const navItems = [
     { name: 'Skills', to: 'skills' },
     { name: 'Projects', to: 'projects' },
     { name: 'Testimonials', to: 'testimonials' },
-    { name: 'Writing', to: 'blog' },
     { name: 'Contact', to: 'contact' },
 ];
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const { theme, toggleTheme } = useTheme();
 
     const handleScroll = useCallback(() => {
         setScrolled(window.scrollY > 50);
@@ -72,14 +73,21 @@ export default function Navbar() {
                             {item.name}
                         </Link>
                     ))}
-                    <a
-                        href="https://surinder.free.nf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary nav-cta"
-                        aria-label="View Resume (opens in new tab)"
+
+                    <button
+                        className="nav-theme-toggle"
+                        onClick={toggleTheme}
+                        aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
                     >
-                        Resume
+                        {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                    </button>
+
+                    <a
+                        href="/login"
+                        className="btn-primary nav-cta"
+                        aria-label="Admin login"
+                    >
+                        <Lock size={14} /> Login
                     </a>
                 </div>
 

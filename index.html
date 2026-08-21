@@ -1,81 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Surinder Kumar — Full Stack MERN Developer, SEO Specialist & AI Enthusiast. Building production-ready web apps with React, Node.js & MongoDB." />
+    <meta name="keywords" content="Surinder Kumar, MERN developer, React developer, Node.js, Full Stack, SEO, AI tools, portfolio" />
+    <meta name="author" content="Surinder Kumar" />
+    <meta property="og:title" content="Surinder Kumar | Full Stack MERN Developer" />
+    <meta property="og:description" content="Building production-ready web apps with React, Node.js & MongoDB. AI tools, SEO, and clean code." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://surinder-web-dev.vercel.app/" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0a0a0f" />
-  <meta name="robots" content="index, follow" />
+    <!-- Theme bootstrap: avoid flash of wrong theme -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('portfolio-theme');
+          if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {}
+      })();
+    </script>
 
-  <!-- Primary Meta Tags -->
-  <title>Surinder Kumar | Vibe Coder & Full Stack MERN Developer</title>
-  <meta name="description"
-    content="Surinder Kumar - Vibe Coder & Full Stack MERN Developer from Mohali, Punjab. Building AI-powered apps, modern web experiences & SEO-optimized solutions with React, Node.js, MongoDB." />
-  <meta name="keywords"
-    content="Surinder Kumar, Vibe Coder, Full Stack Developer, MERN Stack, React Developer, Node.js, Portfolio, Web Developer, AI, Mohali, Punjab" />
-  <meta name="author" content="Surinder Kumar" />
-  <meta name="google-site-verification" content="7DDDhNUg6jYfqTlpcjhcRviMdzzUvxJd2Y-rKmNEqdk" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://surinder-web-dev.vercel.app/" />
-  <meta property="og:title" content="Surinder Kumar | Vibe Coder & Full Stack MERN Developer" />
-  <meta property="og:description"
-    content="Vibe Coder & Full Stack MERN Developer crafting AI-powered apps, modern web experiences, and SEO-optimized solutions." />
-  <meta property="og:image" content="https://surinder-web-dev.vercel.app/vite.svg" />
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://surinder-web-dev.vercel.app/" />
-  <meta property="twitter:title" content="Surinder Kumar | Vibe Coder & Full Stack MERN Developer" />
-  <meta property="twitter:description"
-    content="Vibe Coder & Full Stack MERN Developer crafting AI-powered apps, modern web experiences, and SEO-optimized solutions." />
-  <meta property="twitter:image" content="https://surinder-web-dev.vercel.app/vite.svg" />
-
-  <!-- Canonical -->
-  <link rel="canonical" href="https://surinder-web-dev.vercel.app/" />
-
-  <!-- Sitemap -->
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
-
-  <!-- Fonts with preload -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
-
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Surinder Kumar",
-      "url": "https://surinder-web-dev.vercel.app/",
-      "jobTitle": "Vibe Coder & Full Stack MERN Developer",
-      "description": "Vibe coder crafting AI-powered apps, modern web experiences, and SEO-optimized solutions with React, Node.js, MongoDB & Express.js.",
-      "email": "surinder2003k@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Mohali",
-        "addressRegion": "Punjab",
-        "addressCountry": "India"
-      },
-      "sameAs": [
-        "https://github.com/surinder2003k",
-        "https://linkedin.com/in/surinder-web-dev"
-      ],
-      "knowsAbout": ["React", "Node.js", "MongoDB", "Express.js", "JavaScript", "HTML", "CSS", "Tailwind CSS", "SEO", "AI", "Vibe Coding"]
-    }
-  </script>
-</head>
-
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
-
+    <title>Surinder Kumar | Full Stack MERN Developer</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

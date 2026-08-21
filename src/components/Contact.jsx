@@ -7,43 +7,78 @@ const fadeUp = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-const contactMethods = [
-    {
-        icon: <Mail size={22} />,
-        label: 'Email',
-        value: 'surinder2003k@gmail.com',
-        action: 'mailto:surinder2003k@gmail.com',
-        description: 'Best for project inquiries & collaborations',
-    },
-    {
-        icon: <MessageSquare size={22} />,
-        label: 'Telegram',
-        value: '@surinder2003k',
-        action: 'https://t.me/surinder2003k',
-        description: 'Quick questions & instant replies',
-        external: true,
-    },
-    {
-        icon: <MapPin size={22} />,
-        label: 'Location',
-        value: 'Mohali, Punjab, India',
-        action: null,
-        description: 'Available for remote work worldwide',
-    },
-    {
-        icon: <Phone size={22} />,
-        label: 'Phone',
-        value: '+91 98765 43210',
-        action: 'tel:+919876543210',
-        description: 'For urgent matters only (10 AM - 6 PM IST)',
-    },
-];
+function loadContact() {
+    try {
+        const raw = localStorage.getItem('portfolio-content');
+        if (raw) {
+            const c = JSON.parse(raw);
+            if (c.contact) {
+                const social = c.social || {};
+                return {
+                    email: c.contact.email || 'surinder2003k@gmail.com',
+                    telegram: c.contact.telegram || '@surinder2003k',
+                    location: c.contact.location || 'Mohali, Punjab, India',
+                    phone: c.contact.phone || '+91 98765 43210',
+                    github: social.github || 'https://github.com/surinder2003k',
+                    linkedin: social.linkedin || 'https://linkedin.com/in/surinder-web-dev',
+                    website: social.website || 'https://surinder.free.nf',
+                    telegramUrl: social.telegram || 'https://t.me/surinder2003k',
+                };
+            }
+        }
+    } catch {
+        /* ignore parse errors, fall back to default */
+    }
+    return {
+        email: 'surinder2003k@gmail.com',
+        telegram: '@surinder2003k',
+        location: 'Mohali, Punjab, India',
+        phone: '+91 98765 43210',
+        github: 'https://github.com/surinder2003k',
+        linkedin: 'https://linkedin.com/in/surinder-web-dev',
+        website: 'https://surinder.free.nf',
+        telegramUrl: 'https://t.me/surinder2003k',
+    };
+}
 
 export default function Contact() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-100px' });
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
     const [formStatus, setFormStatus] = useState('idle'); // idle, submitting, success, error
+    const [contact] = useStateInit(loadContact);
+
+    const contactMethods = [
+        {
+            icon: <Mail size={22} />,
+            label: 'Email',
+            value: contact.email,
+            action: `mailto:${contact.email}`,
+            description: 'Best for project inquiries & collaborations',
+        },
+        {
+            icon: <MessageSquare size={22} />,
+            label: 'Telegram',
+            value: contact.telegram,
+            action: contact.telegramUrl,
+            description: 'Quick questions & instant replies',
+            external: true,
+        },
+        {
+            icon: <MapPin size={22} />,
+            label: 'Location',
+            value: contact.location,
+            action: null,
+            description: 'Available for remote work worldwide',
+        },
+        {
+            icon: <Phone size={22} />,
+            label: 'Phone',
+            value: contact.phone,
+            action: `tel:${contact.phone.replace(/\s/g, '')}`,
+            description: 'For urgent matters only (10 AM - 6 PM IST)',
+        },
+    ];
 
     const handleChange = useCallback((e) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -130,7 +165,7 @@ export default function Contact() {
 
                     <motion.div className="contact-socials" variants={fadeUp}>
                         <a
-                            href="https://github.com/surinder2003k"
+                            href={contact.github}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="social-link"
@@ -139,7 +174,7 @@ export default function Contact() {
                             <Github size={22} />
                         </a>
                         <a
-                            href="https://linkedin.com/in/surinder-web-dev"
+                            href={contact.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="social-link"
@@ -148,7 +183,7 @@ export default function Contact() {
                             <Linkedin size={22} />
                         </a>
                         <a
-                            href="https://surinder.free.nf"
+                            href={contact.website}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="social-link"
@@ -157,7 +192,7 @@ export default function Contact() {
                             <Globe size={22} />
                         </a>
                         <a
-                            href="https://t.me/surinder2003k"
+                            href={contact.telegramUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="social-link"
@@ -304,4 +339,10 @@ export default function Contact() {
             </div>
         </section>
     );
+}
+
+// read-once initializer (editor saves to localStorage; reload reflects new values)
+function useStateInit(fn) {
+    const [v] = useState(fn);
+    return [v];
 }

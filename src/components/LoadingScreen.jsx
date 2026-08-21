@@ -1,11 +1,7 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const LoadingScreen = ({ onComplete }) => {
-    const [isVisible, setIsVisible] = useState(true);
-
-    const name = "Surinder Kumar";
-    const letters = name.split("");
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -55,7 +51,6 @@ const LoadingScreen = ({ onComplete }) => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setIsVisible(false);
             if (onComplete) onComplete();
         }, 1800); // Reduced from 3000ms
 

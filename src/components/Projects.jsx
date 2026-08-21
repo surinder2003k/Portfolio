@@ -1,14 +1,13 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ExternalLink, Github, Star, Zap, Shield, TrendingUp, Code2 } from 'lucide-react';
+import { ExternalLink, Github, Star, Zap, Shield, TrendingUp } from 'lucide-react';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-// All projects pulled from real GitHub repos (surinder2003k)
-// Only includes repos that exist on GitHub with actual code/deployments
+// Top 5 flagship projects — fully built, deployed & real
 const projects = [
     {
         title: 'Xylos AI',
@@ -55,72 +54,6 @@ const projects = [
         metrics: '1k+ registered students',
     },
     {
-        title: 'meetuphere',
-        desc: 'Random video chat platform — connect with strangers instantly via WebRTC. Modern Omegle alternative with peer-to-peer video, live text chat, and swipe-to-skip matching.',
-        tags: ['WebRTC', 'Socket.io', 'Next.js', 'Real-time'],
-        live: 'https://meetuphere.vercel.app',
-        github: 'https://github.com/surinder2003k/meetuphere',
-        gradient: 'linear-gradient(135deg, #6c63ff, #00d4aa)',
-        initials: 'MH',
-        featured: false,
-        metrics: 'WebRTC P2P video',
-    },
-    {
-        title: 'Examsentrix',
-        desc: 'AI-powered proctored exam platform with real-time webcam proctoring, live teacher monitoring, and automated scoring. Secure online examinations end-to-end.',
-        tags: ['Next.js', 'AI Proctoring', 'MongoDB', 'Groq'],
-        live: 'https://examsentrix.vercel.app',
-        github: 'https://github.com/surinder2003k/Examsentrix',
-        gradient: 'linear-gradient(135deg, #f59e0b, #ff6b9d)',
-        initials: 'EX',
-        featured: false,
-        metrics: 'AI webcam proctoring',
-    },
-    {
-        title: 'PicExtractor',
-        desc: 'Extract every frame from videos right in the browser. 100% private — no uploads, no server. Parallel frame extraction with millisecond precision, export as PNG/JPEG/WebP.',
-        tags: ['Canvas API', 'React', 'TypeScript', 'Privacy'],
-        live: 'https://picextractor.vercel.app',
-        github: 'https://github.com/surinder2003k/PicExtractor',
-        gradient: 'linear-gradient(135deg, #a855f7, #6c63ff)',
-        initials: 'PX',
-        featured: false,
-        metrics: '100% client-side',
-    },
-    {
-        title: 'Dropzone Share',
-        desc: 'Premium no-auth file-sharing platform. Upload files, generate shareable links & QR codes, manage shared records from a public dashboard. Fast sharing without accounts.',
-        tags: ['Next.js', 'File Upload', 'QR Codes', 'Dashboard'],
-        live: 'https://dropzone-k48dpchv.manus.space',
-        github: 'https://github.com/surinder2003k/Dropzone-Share',
-        gradient: 'linear-gradient(135deg, #00d4aa, #34d399)',
-        initials: 'DZ',
-        featured: false,
-        metrics: 'No-auth sharing',
-    },
-    {
-        title: 'Resource Scout',
-        desc: 'Full-stack dev tool that discovers real, publicly accessible JSON data sources behind webpages. Inspects HTML, scripts, embedded data, GraphQL, RSC, WordPress & player sources.',
-        tags: ['Next.js', 'Playwright', 'Data Discovery', 'DevTool'],
-        live: null,
-        github: 'https://github.com/surinder2003k/Resource-Scout',
-        gradient: 'linear-gradient(135deg, #38bdf8, #0ea5e9)',
-        initials: 'RS',
-        featured: false,
-        metrics: 'Source inspector',
-    },
-    {
-        title: 'Xylos Backlinks',
-        desc: 'Cyberpunk-themed backlink automation dashboard that posts to Dev.to, Blogger & Tumblr with AI-generated content. Supabase backend, OpenRouter API with local fallback.',
-        tags: ['Next.js 15', 'Supabase', 'OpenRouter', 'SEO'],
-        live: 'https://xylosdash-85vxxeu6.manus.space',
-        github: 'https://github.com/surinder2003k/Backlink-Automation',
-        gradient: 'linear-gradient(135deg, #6c63ff, #ec4899)',
-        initials: 'XB',
-        featured: false,
-        metrics: 'Auto-posting SEO',
-    },
-    {
         title: 'Xeloria',
         desc: 'Next-gen web experience showcasing modern web technologies. Interactive animations, 3D elements, and performance-optimized rendering. A playground for creative coding.',
         tags: ['React', 'Three.js', 'Framer Motion', 'Creative'],
@@ -130,50 +63,6 @@ const projects = [
         initials: 'XR',
         featured: false,
         metrics: 'Creative coding',
-    },
-    {
-        title: 'AI Blog Automation',
-        desc: 'Full-stack blog platform with scheduled AI content generation. Clerk auth, Groq API (Llama-3) for trending posts auto-generated twice daily. Modern minimalist UI.',
-        tags: ['Next.js 15', 'Clerk', 'Groq', 'Automation'],
-        live: null,
-        github: 'https://github.com/surinder2003k/Ai-Blog-with-Automation',
-        gradient: 'linear-gradient(135deg, #10b981, #059669)',
-        initials: 'AB',
-        featured: false,
-        metrics: 'Auto content gen',
-    },
-    {
-        title: 'HostelEase',
-        desc: 'Complete full-stack Boys Hostel Management System. Clerk auth with Gmail OAuth, role-based access (Warden/Student), attendance calendar, complaints tracking, notice board.',
-        tags: ['Next.js 15', 'Clerk', 'MongoDB', 'Groq AI'],
-        live: null,
-        github: 'https://github.com/surinder2003k/Hostel',
-        gradient: 'linear-gradient(135deg, #8b5cf6, #6366f1)',
-        initials: 'HE',
-        featured: false,
-        metrics: 'Full-stack RMS',
-    },
-    {
-        title: 'LiveChat',
-        desc: 'Production-ready real-time chat app. Next.js 15 + Express + Socket.io + MongoDB. JWT auth, one-to-one DMs, online/offline presence, typing indicators.',
-        tags: ['Next.js', 'Socket.io', 'Express', 'MongoDB'],
-        live: null,
-        github: 'https://github.com/surinder2003k/LiveChatApp',
-        gradient: 'linear-gradient(135deg, #0ea5e9, #0284c7)',
-        initials: 'LC',
-        featured: false,
-        metrics: 'Real-time chat',
-    },
-    {
-        title: 'PostingApp',
-        desc: 'Full-stack posting application with complete CRUD operations. Server-rendered with EJS, RESTful API design, MongoDB for persistence, clean MVC architecture.',
-        tags: ['EJS', 'Node.js', 'MongoDB', 'Express'],
-        live: 'https://posting-app-eight.vercel.app',
-        github: 'https://github.com/surinder2003k/PostingApp',
-        gradient: 'linear-gradient(135deg, #e34c26, #f0db4f)',
-        initials: 'PO',
-        featured: false,
-        metrics: 'CRUD learning project',
     },
 ];
 
@@ -188,8 +77,6 @@ export default function Projects() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-    const liveCount = projects.filter(p => p.live).length;
-
     return (
         <section className="section" id="projects" ref={ref} aria-label="Featured projects">
             <div className="container">
@@ -203,8 +90,8 @@ export default function Projects() {
                         Featured <span className="gradient-text">Projects</span>
                     </h2>
                     <p className="section-subtitle" style={{ margin: '0 auto' }}>
-                        {projects.length} real projects shipped — {liveCount} live & deployed, rest open-source on GitHub.
-                        From AI tools to full-stack apps, each one solves a real problem.
+                        My top 5 flagship builds — each one shipped, deployed, and solving a real problem.
+                        From AI tools to full-stack apps, these are the projects I'm most proud of.
                     </p>
                 </motion.div>
 
@@ -220,7 +107,7 @@ export default function Projects() {
                                 visible: {
                                     opacity: 1,
                                     y: 0,
-                                    transition: { delay: i * 0.1, duration: 0.5 },
+                                    transition: { delay: i * 0.12, duration: 0.5 },
                                 },
                             }}
                             whileHover={{ y: -8, transition: { duration: 0.3 } }}
@@ -245,26 +132,15 @@ export default function Projects() {
                             </div>
 
                             <div className="project-links">
-                                {project.live ? (
-                                    <a
-                                        href={project.live}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="project-link live"
-                                        aria-label={`View live demo of ${project.title}`}
-                                    >
-                                        <ExternalLink size={16} aria-hidden="true" /> Live Demo
-                                    </a>
-                                ) : (
-                                    <span
-                                        className="project-link live"
-                                        style={{ opacity: 0.5, cursor: 'not-allowed' }}
-                                        aria-label={`${project.title} has no live demo yet`}
-                                        title="Live demo coming soon"
-                                    >
-                                        <Code2 size={16} aria-hidden="true" /> Code Only
-                                    </span>
-                                )}
+                                <a
+                                    href={project.live}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="project-link live"
+                                    aria-label={`View live demo of ${project.title}`}
+                                >
+                                    <ExternalLink size={16} aria-hidden="true" /> Live Demo
+                                </a>
                                 <a
                                     href={project.github}
                                     target="_blank"
